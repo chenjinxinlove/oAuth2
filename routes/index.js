@@ -6,4 +6,9 @@ module.exports = function(app) {
   var authorize = require('./authorize');
     app.get('/OAuth2/authorize', middlewares.ensureLogin, authorize.checkAuthorizeParams, authorize.showAppInfo);
     app.post('/OAuth2/authorize', middlewares.ensureLogin, middlewares.postBody, authorize.checkAuthorizeParams, authorize.confirmApp);
+
+    // 模拟客户端获得授权码
+  var client = require('./client');
+  // app.get('/example/auth', client.requestAuth);
+  app.get('/example/auth/callback', client.authCallback);
 }
